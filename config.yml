@@ -1,9 +1,9 @@
-1:
+first:
   host: "www.mandar.com"
   filename: "templates/mandar.html"
-2:
+second:
   host: "www.mandar1.com"
   filename: "templates/mandar1.html"
-3:
+third:
   host: "www.mandar2.com"
   filename: "templates/mandar2.html"
