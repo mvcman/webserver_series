@@ -29,13 +29,15 @@ def create_response(file, connection, protocol, status):
             print(i)
             alldata += str.encode(i)
 
+    length = len(alldata)
+    print(length)
     if status == 'not found':
-        connection.sendall(b"HTTP/1.0 404 Not Found\nContent-Type: text/html\n")
+        connection.sendall(bytes("HTTP/1.0 404 Not Found\nContent-Type: text/html\nContent-Length: {}\n".format(length), 'utf-8'))
     else:
         if 'HTTP/1.0' in protocol:
-            connection.sendall(b"HTTP/1.0 200 OK\nContent-Type: text/html\n")
+            connection.sendall(bytes("HTTP/1.0 200 OK\nContent-Type: text/html\nContent-Length: {}\n".format(length), 'utf-8'))
         else:
-            connection.sendall(b"HTTP/1.1 200 OK\nContent-Type: text/html\n")
+            connection.sendall(bytes("HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: {}\n".format(length), 'utf-8'))
     connection.sendall(b"\r\n")
     connection.sendall(alldata)
 

@@ -44,7 +44,7 @@ def create_response(file, connection, protocol, status):
             alldata += str.encode(i)
 
     if status == 'not authorized':
-        connection.sendall(b"HTTP/1.0 401 Unauthorized\nContent-Type: text/html\n")
+        connection.sendall(b"HTTP/1.0 403 Not Authorized\nContent-Type: text/html\n")
     elif status == 'not found':
         connection.sendall(b"HTTP/1.0 404 Not Found\nContent-Type: text/html\n")
     else:
@@ -108,7 +108,7 @@ while True:
                 if b'\r\n\r\n' in http_request:
                     try:
                         if b'Authorization:' in http_request:
-                            auth_value = my_req.splitlines()[2]
+                            auth_value = my_req.splitlines()[4]
                             print('auth value', auth_value)
                             value = re.split('[:]', auth_value)
                             print('Colon separated value', value)
@@ -121,9 +121,9 @@ while True:
                             else:
                                 isAuthenticated = 'no'
                         else:
-                            isAuthenticated = 'no1'
-                                # send_response(request_host, 'templates/error.html', my_req, socketList[i], protocol)
-                                # http_request = b''
+                            # socketList[i].sendall(b"HTTP/1.1 401 Unauthorized\nWWW-Authenticate: Basic realm=Access to the web server\nContent-Type: text/html\n")
+                            isAuthenticated = 'never'
+                            # break
                         print('inside loop', response_file)
                         send_response(request_host, response_file, my_req, socketList[i], protocol, isAuthenticated)
                         http_request = b''
