@@ -65,20 +65,24 @@ def send_response(host, file, req, conn, protocol, isAuthenticated):
         connection_type(req, conn)
 
 def handle_request(client_connection):
+    http_request = b''
     while True:
         response_file = ''
         request = client_connection.recv(1024)
-        my_req = request.decode()
-        print(request.decode())
-        protocol = my_req.splitlines()[0]
-        request_host = my_req.splitlines()[1]
-        with open('config.yml') as data_file:
-            config = yaml.safe_load(data_file)
-            for v in config.items():
-                host_headers.append(v[1]['host'])
-                if v[1]['host'] in request_host:
-                    response_file = v[1]['filename']
-        if b'\r\n\r\n' in request:
+        http_request += request
+        print(http_request)
+        if b'\r\n\r\n' in http_request:
+            my_req = http_request.decode()
+            print(request.decode())
+            protocol = my_req.splitlines()[0]
+            request_host = my_req.splitlines()[1]
+            http_request = b''
+            with open('config.yml') as data_file:
+                config = yaml.safe_load(data_file)
+                for v in config.items():
+                    host_headers.append(v[1]['host'])
+                    if v[1]['host'] in request_host:
+                        response_file = v[1]['filename']
             if re.search('Authorization:', my_req):
                 v = my_req.split('\n')
                 print('Arrya of my_req', v)
