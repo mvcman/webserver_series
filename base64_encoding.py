@@ -15,6 +15,10 @@ def decode_body(message):
     decoded_data = message_bytes.decode('ascii')
     return decoded_data
 
+def decode_utf(message):
+    decoded_data = message.decode('utf-8')
+    return decoded_data
+
 data = encode_body("{ username: 'mandar3', password: 'mandar3' }")
 print('Bearer', data)
 

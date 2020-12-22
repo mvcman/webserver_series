@@ -84,8 +84,8 @@ def send_response(host, file, req, conn, protocol, isAuthenticated):
         status = 'not found'
         create_response('templates/error.html', conn, protocol, status)
         connection_type(req, conn)
+     
         
-
 while True:
     try:
         for i in range(0, len(socketList)):
