@@ -1,0 +1,15 @@
+server1:
+  host: "www.mandar.com"
+  filename: "templates/mandar.html"
+  username: "mandar"
+  password: "287aff41e1f6a8107fa18f5805992e8ac22da0a47427a95295cb96df0245c7ac"
+server2:
+  host: "www.mandar1.com"
+  filename: "templates/mandar1.html"
+  username: "mandar1"
+  password: "bf34830a9ef65f519f8890fcb116819665aff9739489385860b239ebea784f04"
+server3:
+  host: "www.mandar2.com"
+  filename: "templates/mandar2.html"
+  username: "mandar2"
+  password: "98614346c62016c3dca59b94ad382798de70443b57c603aa5a02e6b1d5686543"

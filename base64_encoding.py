@@ -1,5 +1,10 @@
 import base64
+import hashlib
 
+def create_hash(message):
+    data = hashlib.sha256(message.encode())
+    return data.hexdigest()
+    
 def encode_body(message):
     message_bytes = message.encode('ascii')
     print(message_bytes)
